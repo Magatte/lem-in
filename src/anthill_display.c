@@ -6,7 +6,7 @@
 /*   By: pba <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/21 17:54:28 by pba               #+#    #+#             */
-/*   Updated: 2016/05/04 03:32:10 by pba              ###   ########.fr       */
+/*   Updated: 2016/05/17 20:28:18 by pba              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void			tubes_display(t_anthill *anthill)
 	int				i;
 
 	i = 0;
-	while (anthill->tubes[i])
+	while (anthill->tubes && anthill->tubes[i])
 	{
 		ft_putstr("Tube : ");
 		ft_putendl(anthill->tubes[i]);
@@ -55,6 +55,8 @@ static void			neighbours_display(t_anthill *anthill)
 	int				i;
 	t_room			*tmp;
 
+	if (!anthill->rooms)
+		return ;
 	tmp = anthill->rooms->head;
 	while (tmp)
 	{
@@ -104,9 +106,11 @@ static void			path_display(t_anthill *anthill)
 void				anthill_display(t_anthill *anthill)
 {
 	ft_putstr("Start : room ");
-	ft_putendl(anthill->start->name);
+	if (anthill->target)
+		ft_putendl(anthill->start->name);
 	ft_putstr("End : room ");
-	ft_putendl(anthill->target->name);
+	if (anthill->target)
+		ft_putendl(anthill->target->name);
 	ft_putchar('\n');
 	rooms_display(anthill);
 	tubes_display(anthill);

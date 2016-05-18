@@ -6,13 +6,14 @@
 /*   By: pba <pba@42.fr>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 10:42:38 by pba               #+#    #+#             */
-/*   Updated: 2016/05/11 15:43:34 by pba              ###   ########.fr       */
+/*   Updated: 2016/05/18 17:35:58 by pba              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEMIN_H
 # define LEMIN_H
 # include "libft.h"
+
 typedef struct		s_room
 {
 	char			*name;

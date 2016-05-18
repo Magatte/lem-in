@@ -6,7 +6,7 @@
 /*   By: pba <pba@42.fr>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 17:51:21 by pba               #+#    #+#             */
-/*   Updated: 2016/05/11 09:35:41 by pba              ###   ########.fr       */
+/*   Updated: 2016/05/17 20:29:10 by pba              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void			room_init(t_anthill *anthill)
 
 	flag = 0;
 	i = 0;
-	while (anthill->lines[i])
+	while (anthill->lines && anthill->lines[i])
 	{
 		if (is_room(anthill->lines[i]))
 		{
@@ -46,7 +46,7 @@ static void			tube_init(t_anthill *anthill)
 	int				i;
 
 	i = 0;
-	while (anthill->lines[i])
+	while (anthill->lines && anthill->lines[i])
 	{
 		if (is_tube(anthill->lines[i]))
 			anthill->tubes = push_line(anthill->tubes, anthill->lines[i]);
@@ -58,6 +58,8 @@ static int			search_tube(t_anthill *anthill, char *room)
 {
 	t_room			*tmp;
 
+	if (!anthill->rooms)
+		return (0);
 	tmp = anthill->rooms->head;
 	while (tmp)
 	{
@@ -74,7 +76,7 @@ static int			parse_tubes(t_anthill *anthill)
 	char			**descript;
 
 	i = 0;
-	while (anthill->tubes[i])
+	while (anthill->tubes && anthill->tubes[i])
 	{
 		descript = ft_strsplit(anthill->tubes[i], '-');
 		if (!search_tube(anthill, descript[0])

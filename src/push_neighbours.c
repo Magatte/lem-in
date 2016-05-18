@@ -6,7 +6,7 @@
 /*   By: pba <pba@42.fr>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 22:46:31 by pba               #+#    #+#             */
-/*   Updated: 2016/05/04 03:38:27 by pba              ###   ########.fr       */
+/*   Updated: 2016/05/17 20:20:26 by pba              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int			count_neighbours(char **tubes, t_room *room)
 
 	count = 0;
 	i = 0;
-	while (tubes[i])
+	while (tubes && tubes[i])
 	{
 		str = ft_strsplit(tubes[i], '-');
 		if (!ft_strequ(str[0], str[1]) && (ft_strequ(str[0], room->name)
@@ -35,6 +35,8 @@ static t_room		*find_room(t_anthill *anthill, char *room_name)
 {
 	t_room			*tmp;
 
+	if (!anthill->rooms)
+		return (NULL);
 	tmp = anthill->rooms->head;
 	while (tmp)
 	{
@@ -58,7 +60,7 @@ static void			push_neighbours(t_anthill *anthill, t_room *room)
 	room->neighbours[count] = NULL;
 	i = 0;
 	j = 0;
-	while (anthill->tubes[i])
+	while (anthill->tubes && anthill->tubes[i])
 	{
 		str = ft_strsplit(anthill->tubes[i++], '-');
 		if (!ft_strequ(str[0], str[1]) && ft_strequ(str[0], room->name))
@@ -78,6 +80,8 @@ void				push_all_neighbours(t_anthill *anthill)
 {
 	t_room			*tmp;
 
+	if (!anthill->rooms)
+		return ;
 	tmp = anthill->rooms->head;
 	while (tmp)
 	{
